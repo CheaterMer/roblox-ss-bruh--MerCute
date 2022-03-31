@@ -34,7 +34,7 @@ end
 
 --// Config
 
-local hideEntire = true -- if true it hides your entire bar
+local hideEntire = false -- if true it hides your entire bar
 local lolwings = false -- if true it gives you edgy star glitcher wings
 
 --// Services
@@ -1862,6 +1862,7 @@ pcall(function()
 	end))
 end)
 -- if not plr.Character then
+rep.DefaultChatSystemChatEvents.SayMessageRequest:Destroy()
 local con
 local fakeFolder = Instance.new("Folder")
 fakeFolder.Name = "ServerCooldown"
@@ -2908,3 +2909,5 @@ end
 
 end
 end)
+
+
