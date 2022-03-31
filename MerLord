@@ -34,7 +34,7 @@ end
 
 --// Config
 
-local hideEntire = false -- if true it hides your entire bar
+local hideEntire = true -- if true it hides your entire bar
 local lolwings = false -- if true it gives you edgy star glitcher wings
 
 --// Services
