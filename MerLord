@@ -1862,7 +1862,6 @@ pcall(function()
 	end))
 end)
 -- if not plr.Character then
-rep.DefaultChatSystemChatEvents.SayMessageRequest:Destroy()
 local con
 local fakeFolder = Instance.new("Folder")
 fakeFolder.Name = "ServerCooldown"
