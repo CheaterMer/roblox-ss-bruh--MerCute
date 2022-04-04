@@ -64,7 +64,7 @@ uiSecs.ctthings2 = uiPages.page8:addSection("Custom Name Color")
 uiSecs.ctthings2 = uiPages.page8:addSection("Custom Name Color")
 uiSecs.ctthings3 = uiPages.page8:addSection("Custom Name Text")
 uiSecs.freeze = uiPages.page2:addSection("Delete Someone's Godmode(Shadow dio's godmode)")
-uiSecs.freeze1 = uiPages.page2:addSection("Delete Someone's HumanoidRootPart(Can't lock on to them)")
+uiSecs.freeze1 = uiPages.page2:addSection("Troll Scripts")
 uiSecs.opstuffs = uiPages.page7:addSection("OP Stuffs")
 
 uiSecs.susmap1:addButton(
@@ -251,9 +251,387 @@ uiSecs.freeze:addTextbox(
 )
 
 uiSecs.freeze1:addButton(
-    "Delete HumanoidRootPart Of Other Player",
+    "bone sex",
     function()
-        game.Players.plr.Character["HumanoidRootPart"]:Destroy()
+        
+player = game.Players.LocalPlayer
+char = player.Character
+local TweenService = game:GetService("TweenService")
+_G.nowings = true
+local LockOn = player.Backpack.Main.LockOnScript.LockOn.Value
+wait(1.5)
+
+
+
+
+--S
+local part1 = Instance.new("Part")
+part1.Name = "part1"
+part1.Parent = char
+part1.Anchored = false
+part1.CanCollide = false
+part1.Transparency = 0.9
+local part2 = Instance.new("Part")
+part2.Name = "part2"
+part2.Parent = char
+part2.Anchored = false
+part2.CanCollide = false
+part2.Transparency = 0.9
+local part3 = Instance.new("Part")
+part3.Name = "part3"
+part3.Parent = char
+part3.Anchored = false
+part3.CanCollide = false
+part3.Transparency = 0.9
+local part4 = Instance.new("Part")
+part4.Name = "part4"
+part4.Parent = char
+part4.Anchored = false
+part4.CanCollide = false
+part4.Transparency = 0.9
+local part5 = Instance.new("Part")
+part5.Name = "part5"
+part5.Parent = char
+part5.Anchored = false
+part5.CanCollide = false
+part5.Transparency = 0.9
+--E
+local part6 = Instance.new("Part")
+part6.Name = "part6"
+part6.Parent = char
+part6.Anchored = false
+part6.CanCollide = false
+part6.Transparency = 0.9
+
+local part7 = Instance.new("Part")
+part7.Name = "part7"
+part7.Parent = char
+part7.Anchored = false
+part7.CanCollide = false
+part7.Transparency = 0.9
+
+local part8 = Instance.new("Part")
+part8.Name = "part8"
+part8.Parent = char
+part8.Anchored = false
+part8.CanCollide = false
+part8.Transparency = 0.9
+
+local part9 = Instance.new("Part")
+part9.Name = "part9"
+part9.Parent = char
+part9.Anchored = false
+part9.CanCollide = false
+part9.Transparency = 0.9
+
+local part10 = Instance.new("Part")
+part10.Name = "part10"
+part10.Parent = char
+part10.Anchored = false
+part10.CanCollide = false
+part10.Transparency = 0.9
+--X
+local part11 = Instance.new("Part")
+part11.Name = "part11"
+part11.Parent = char
+part11.Anchored = false
+part11.CanCollide = false
+part11.Transparency = 0.9
+
+local part12 = Instance.new("Part")
+part12.Name = "part12"
+part12.Parent = char
+part12.Anchored = false
+part12.CanCollide = false
+part12.Transparency = 0.9
+
+local part13 = Instance.new("Part")
+part13.Name = "part13"
+part13.Parent = char
+part13.Anchored = false
+part13.CanCollide = false
+part13.Transparency = 0.9
+
+local part14 = Instance.new("Part")
+part14.Name = "part14"
+part14.Parent = char
+part14.Anchored = false
+part14.CanCollide = false
+part14.Transparency = 0.9
+
+local part15 = Instance.new("Part")
+part15.Name = "part15"
+part15.Parent = char
+part15.Anchored = false
+part15.CanCollide = false
+part15.Transparency = 0.9
+
+local part16 = Instance.new("Part")
+part16.Name = "part16"
+part16.Parent = char
+part16.Anchored = false
+part16.CanCollide = false
+part16.Transparency = 0.9
+
+--pp
+local part17 = Instance.new("Part")
+part17.Name = "part17"
+part17.Parent = char.HumanoidRootPart
+part17.Anchored = false
+part17.CanCollide = false
+part17.Transparency = 0.1
+
+local part18 = Instance.new("Part")
+part18.Name = "part18"
+part18.Parent = char.HumanoidRootPart
+part18.Anchored = false
+part18.CanCollide = false
+part18.Transparency = 0.0
+
+
+--S 
+
+local weld1 = Instance.new("Weld")
+weld1.Parent = char.HumanoidRootPart
+weld1.Part0 = LockOn.Torso
+weld1.Part1 = part1
+weld1.C0 = CFrame.new(3,10,3)*CFrame.Angles(0, 0, math.rad(90))
+weld1.Name = "weld1"
+
+local weld2 = Instance.new("Weld")
+weld2.Parent = char.HumanoidRootPart
+weld2.Part0 = LockOn.Torso
+weld2.Part1 = part2
+weld2.C0 = CFrame.new(2,11.5,3)*CFrame.Angles(0, 0, math.rad(0))
+weld2.Name = "weld2"
+
+local weld3 = Instance.new("Weld")
+weld3.Parent = char.HumanoidRootPart
+weld3.Part0 = LockOn.Torso
+weld3.Part1 = part3
+weld3.C0 = CFrame.new(3,12.5,3)*CFrame.Angles(0, 0, math.rad(90))
+weld3.Name = "weld3"
+
+local weld4 = Instance.new("Weld")
+weld4.Parent = char.HumanoidRootPart
+weld4.Part0 = LockOn.Torso
+weld4.Part1 = part4
+weld4.C0 = CFrame.new(4,13.5,3)*CFrame.Angles(0, 0, math.rad(0))
+weld4.Name = "weld4"
+local weld5 = Instance.new("Weld")
+weld5.Parent = char.HumanoidRootPart
+weld5.Part0 = LockOn.Torso
+weld5.Part1 = part5
+weld5.C0 = CFrame.new(3,14.5,3)*CFrame.Angles(0, 0, math.rad(90))
+weld5.Name = "weld5"
+--E
+local weld6 = Instance.new("Weld")
+weld6.Parent = char.HumanoidRootPart
+weld6.Part0 = LockOn.Torso
+weld6.Part1 = part6
+weld6.C0 = CFrame.new(0,11,3)*CFrame.Angles(0, 0, math.rad(0))
+weld6.Name = "weld6"
+
+local weld7 = Instance.new("Weld")
+weld7.Parent = char.HumanoidRootPart
+weld7.Part0 = LockOn.Torso
+weld7.Part1 = part7
+weld7.C0 = CFrame.new(0,13,3)*CFrame.Angles(0, 0, math.rad(0))
+weld7.Name = "weld7"
+
+local weld8 = Instance.new("Weld")
+weld8.Parent = char.HumanoidRootPart
+weld8.Part0 = LockOn.Torso
+weld8.Part1 = part8
+weld8.C0 = CFrame.new(-1,12,3)*CFrame.Angles(0, 0, math.rad(90))
+weld8.Name = "weld8"
+
+local weld9 = Instance.new("Weld")
+weld9.Parent = char.HumanoidRootPart
+weld9.Part0 = LockOn.Torso
+weld9.Part1 = part9
+weld9.C0 = CFrame.new(-1,10,3)*CFrame.Angles(0, 0, math.rad(90))
+weld9.Name = "weld9"
+
+local weld10 = Instance.new("Weld")
+weld10.Parent = char.HumanoidRootPart
+weld10.Part0 = LockOn.Torso
+weld10.Part1 = part10
+weld10.C0 = CFrame.new(-1,14.5,3)*CFrame.Angles(0, 0, math.rad(90))
+weld10.Name = "weld10"
+--X
+local weld11 = Instance.new("Weld")
+weld11.Parent = char.HumanoidRootPart
+weld11.Part0 = LockOn.Torso
+weld11.Part1 = part11
+weld11.C0 = CFrame.new(-6,12,3)*CFrame.Angles(0, 0, math.rad(50))
+weld11.Name = "weld11"
+
+local weld12 = Instance.new("Weld")
+weld12.Parent = char.HumanoidRootPart
+weld12.Part0 = LockOn.Torso
+weld12.Part1 = part12
+weld12.C0 = CFrame.new(-5,11,3)*CFrame.Angles(0, 0, math.rad(50))
+weld12.Name = "weld12"
+
+local weld13 = Instance.new("Weld")
+weld13.Parent = char.HumanoidRootPart
+weld13.Part0 = LockOn.Torso
+weld13.Part1 = part13
+weld13.C0 = CFrame.new(-6,12,3)*CFrame.Angles(0, 0, math.rad(-50))
+weld13.Name = "weld13"
+
+local weld14 = Instance.new("Weld")
+weld14.Parent = char.HumanoidRootPart
+weld14.Part0 = LockOn.Torso
+weld14.Part1 = part14
+weld14.C0 = CFrame.new(-7,13,3)*CFrame.Angles(0, 0, math.rad(50))
+weld14.Name = "weld14"
+
+local weld15 = Instance.new("Weld")
+weld15.Parent = char.HumanoidRootPart
+weld15.Part0 = LockOn.Torso
+weld15.Part1 = part15
+weld15.C0 = CFrame.new(-4.5,13.3,3)*CFrame.Angles(0, 0, math.rad(-50))
+weld15.Name = "weld15"
+
+local weld16 = Instance.new("Weld")
+weld16.Parent = char.HumanoidRootPart
+weld16.Part0 = LockOn.Torso
+weld16.Part1 = part16
+weld16.C0 = CFrame.new(-7.7,10.7,3)*CFrame.Angles(0, 0, math.rad(-50))
+weld16.Name = "weld16"
+
+--ppweld
+
+local weld17 = Instance.new("Weld")
+weld17.Parent = char.HumanoidRootPart
+weld17.Part0 = LockOn.HumanoidRootPart
+weld17.Part1 = part17
+weld17.C0 = CFrame.new(0,-0.8,-0.5)*CFrame.Angles(30, 0, math.rad(0))
+weld17.Name = "weld17"
+
+local weld18 = Instance.new("Weld")
+weld18.Parent = char.HumanoidRootPart
+weld18.Part0 = LockOn.HumanoidRootPart
+weld18.Part1 = part18
+weld18.C0 = CFrame.new(0,-0.7,-1.8)*CFrame.Angles(30, 0, math.rad(0))
+weld18.Name = "weld18"
+
+    local c0s = {
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(2.8,1.5,0.5)*CFrame.Angles(0, 0, math.rad(35)),
+CFrame.new(0,-0.8,-1)*CFrame.Angles(30, 0, math.rad(0)),
+CFrame.new(0,-0.8,-1.5)*CFrame.Angles(30, 0, math.rad(0)),
+}
+local welds = {weld1,weld2,weld3,weld4,weld5,weld6,weld7,weld8,weld9,weld10,weld11,weld12,weld13,weld14,weld15,weld16,weld17,weld18}
+
+    local c0s = {
+CFrame.new(0,-0.8,-1)*CFrame.Angles(30, 0, math.rad(0)),
+CFrame.new(0,-0.8,-1.5)*CFrame.Angles(30, 0, math.rad(0)),
+}
+local welds2 = {weld17,weld18}
+--tweenanimation
+for i = 1,#welds2 do
+        local part = welds2[i]
+        
+        local Info = TweenInfo.new(
+            0.5,                              --Length (seconds)
+            Enum.EasingStyle.Sine,          --Easing Style
+            Enum.EasingDirection.InOut,       --Easing Direction
+            -1,                             --Times Repeated
+            true,                           --reversed
+            0                               --deşau
+            )
+            
+        local Goals = {
+            C0 = c0s[i]
+        }
+        
+        local DickThrust = TweenService:Create(part, Info, Goals)
+        DickThrust:Play()
+end
+
+        
+for i = 1,1,1 do
+    spawn(function()
+    
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Bones",
+        [3] = "AirSpawn2",
+        [4] = Vector3.new(0,10,0)
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.SansMoves:InvokeServer(unpack(args))
+
+end)
+end
+ 
+local detect 
+local detect2
+local val = Instance.new('NumberValue',char)
+val.Name = 'BonesRIGHT'
+local num = 0
+local tab = {}
+local tab2 = {}
+detect = char.Attacks.ChildAdded:Connect(function(child)
+    if child.Name == "Bone" then
+        table.insert(tab,child)
+        child:WaitForChild("NotTouched"):Destroy()
+        child:WaitForChild("BodyVelocity"):Destroy()
+local bp = Instance.new('BodyPosition',child)
+bp.Name = 'Client'
+bp.P = 30000
+bp.D = 150
+bp.Position = char.HumanoidRootPart.Position
+table.insert(tab2,bp)
+        num = num + 1
+        val.Value = num
+    end
+end)
+_G.nowings = false
+detect2 = val:GetPropertyChangedSignal("Value"):Connect(function(amo)
+if val.Value == 18 then
+    
+for i = 1,#tab do
+spawn(function()
+    local part = welds[i].Part1
+    local sl = tab[i]
+    local bs = tab2[i]
+    part.Transparency = 1
+while true do game['Run Service'].Heartbeat:wait()
+    if _G.nowings then break end
+    local cfr = part.CFrame*CFrame.Angles(0,math.rad(90),math.rad(180))
+bs.Position = cfr.p 
+sl.CFrame = cfr
+end
+part:Destroy()
+sl:Destroy()
+end)
+end
+detect:Disconnect()
+detect2:Disconnect()
+val:Destroy()
+
+end
+end)
     end
 )
 
