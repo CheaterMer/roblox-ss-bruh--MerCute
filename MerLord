@@ -1357,22 +1357,6 @@ local inputBegan = {
 			charaMoves:InvokeServer({pass,"KnifeHeal"})
 		end
 	end,
-	[Enum.KeyCode.J] = function()
-		if plr.Backpack.Main.LockOnScript.LockOn.Value then
-			plr.Character:SetPrimaryPartCFrame(plr.Backpack.Main.LockOnScript.LockOn.Value.HumanoidRootPart.CFrame * CFrame.new(0,0,1))
-			wait(0.08)
-			plr.Character.Humanoid:LoadAnimation(bruhhhhh):Play()
-			remotes.Damage:InvokeServer(pass,plr.Backpack.Main.LockOnScript.LockOn.Value,{HitEffect = "HeavyHitEffect", 
-				Sound = rep.Sounds.Knockback, 
-				Velocity = plr.Character.HumanoidRootPart.CFrame.lookVector * 150 + Vector3.new(0,40,0), 
-				Type = "Knockback", 
-				HitTime = 2.4, 
-				HurtAnimation = rep.Animations.HurtAnimations.Knockback2, 
-				VictimCFrame = plr.Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(180), 0) + plr.Character.HumanoidRootPart.CFrame.lookVector * 1, 
-				Damage = 10,
-				CameraShake = "Bump"},"Lord")
-		end
-	end,
 	[Enum.KeyCode.L] = function()
 		local b = plr.Character.Humanoid.Health
 		for i=1,2 do
