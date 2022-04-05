@@ -1180,22 +1180,6 @@ end
 local bruhhhhh = Instance.new("Animation")
 bruhhhhh.AnimationId = "rbxassetid://4456901030"
 local inputBegan = {
-	[Enum.KeyCode.One] = function()
-		if not debounce and main.LockOnScript.LockOn.Value then
-			debounce = true
-			task.wait(.13)
-			for i=1,6 do
-				pcall(function()
-					charaMoves:InvokeServer({ pass , "KnifeProjectile", "Spawn", main.LockOnScript.LockOn.Value.Torso.Position});
-				end)
-				task.wait(.08)
-			end
-			debounce = false
-		end
-	end,
-	[Enum.KeyCode.Z] = function()
-		charaMoves:InvokeServer({pass,"YellowBeam","Fire"})
-	end,
 	[Enum.KeyCode.KeypadZero] = function()
 		if not debounce then
 			debounce = true
@@ -2909,4 +2893,109 @@ end
 end
 end)
 
+local debounce = true 
+local cooldown = 0
+game:GetService("UserInputService").InputBegan:Connect(function(key, typing) 
+    if typing then return end 
+    local button = Enum.KeyCode.Z
+    if key.KeyCode == button then
+       if debounce then 
+          print("combo pro") 
+          debounce = false
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://4820780935"
+local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(1)
+          local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    [3] = {
+        ["HitTime"] = 1, 
+        ["Type"] = "Knockback", 
+        ["HitEffect"] = "BurstEffect",
+        ["CombatInv"] = true,
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback3, 
+        ["Velocity"] = Vector3.new(0, 15, 0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 8, 
+        ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Knockback,
+        ["Damage"] = 40
+    }
+}
 
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+
+wait(0.7)
+
+char = game.Players.LocalPlayer.Character
+char.Humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+tar = char.HumanoidRootPart.CFrame*CFrame.new(0,17,0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 8
+char.Humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+v2 = Instance.new('BodyPosition',char.HumanoidRootPart) 
+fol = Instance.new('Folder',v2)
+v2.Name = 'Client' 
+v2.MaxForce = Vector3.new(1,1,1)*100000 
+v2.D = 2500 
+v2.P = 60000 
+v2.Position = (tar).p
+
+wait(0.2)
+
+local Anim = Instance.new("Animation")
+Anim.AnimationId = "rbxassetid://5858687214"
+local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+k:Play()
+k:AdjustSpeed(0.9)
+k.TimePosition = 1.2
+          local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    [3] = {
+        ["HitTime"] = 1, 
+        ["Type"] = "Knockback", 
+        ["HitEffect"] = "BurstEffect",
+        ["CombatInv"] = true,
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.GroundHurt, 
+        ["Velocity"] = Vector3.new(0, -55, 0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 10, 
+        ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Knockback,
+        ["Damage"] = 40
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+v2:Destroy()
+wait(0.4)
+char = game.Players.LocalPlayer.Character
+char.Humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+tar = char.HumanoidRootPart.CFrame*CFrame.new(0,-3,0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 8
+char.Humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+v2 = Instance.new('BodyPosition',char.HumanoidRootPart) 
+fol = Instance.new('Folder',v2)
+v2.Name = 'Client' 
+v2.MaxForce = Vector3.new(1,1,1)*100000 
+v2.D = 2500 
+v2.P = 60000 
+v2.Position = (tar).p
+wait(0.1)
+v2:Destroy()
+wait(0.1)
+          local args = {
+    [1] = getrenv()._G.Pass,
+    [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    [3] = {
+        ["HitTime"] = 1, 
+        ["Type"] = "Knockback", 
+        ["HitEffect"] = "BurstEffect",
+        ["CombatInv"] = true,
+        ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback3, 
+        ["Velocity"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 100, 
+        ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Knockback,
+        ["Damage"] = 40
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+          wait(cooldown)
+          debounce = true            
+       end
+    end
+end)
