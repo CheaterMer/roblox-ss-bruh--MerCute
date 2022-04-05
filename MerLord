@@ -1112,11 +1112,6 @@ local function start(a) -- other people combat
 					sak = 0
 				end
 			end)
-			killAura = false
-			task.wait(.08)
-			cooldown = false
-			killAura = false
-			killAura = true
 		elseif i.KeyCode == Enum.KeyCode.P then
 			if combatStyle == "Chara" then
 				combatStyle = "IDK"
@@ -1332,21 +1327,6 @@ local inputBegan = {
 			Duration = 3;
 		})
 	end,
-	[Enum.KeyCode.K] = function()
-		if killaura and knockBaack then
-			killaura = false
-			killAura = false
-			knockBaack = false
-			chat("[KILL_AURA]: FALSE",currentColor)
-		elseif not killaura and not knockBaack then
-			killaura = true
-			killAura = true
-			chat("[KILL_AURA]: TRUE",currentColor)
-		elseif killaura and not knockBaack then
-			knockBaack = true
-			chat("[KNOCKBACK]: TRUE",currentColor)
-		end
-	end,
 	[Enum.KeyCode.M] = function()
 		coroutine.resume(coroutine.create(function()
 			charaMoves:InvokeServer({pass,"SpecialHell2"})
@@ -1365,38 +1345,6 @@ local inputBegan = {
 		end
 		plr.Character.Humanoid.Health = b
 		plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Freefall)
-	end,
-	[Enum.KeyCode.H] = function()
-		if not debounce and not cooldown then
-			local victim = plr.Backpack.Main.LockOnScript.LockOn.Value
-			if not victim then
-				local nearestMag = 10
-				local nearest
-				for i,v in pairs(workspace:GetChildren()) do
-					local hum = v:FindFirstChildOfClass("Humanoid")
-					if hum and v:FindFirstChild("Head") and hum.Health > 0 and v.Name ~= plr.Name then
-						pcall(function()
-							local mag = (v.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).Magnitude
-							if mag < nearestMag then
-								nearestMag = mag
-								nearest = v
-							end
-						end)
-					end
-				end
-				victim = nearest
-			end
-			if not victim then return end
-			remotes.Damage:InvokeServer(pass,victim,{
-				HitEffect = "HeavyHitEffect", 
-				Sound = rep.Sounds.ChaosSaberSlice, 
-				Type = "Knockback", 
-				HitTime = 2.5, 
-				HurtAnimation = rep.Animations.HurtAnimations.Stunned, 
-				Damage = 10
-			},"Lord")
-			chat("[LOAD_FILE]: UNKNOWN")
-		end
 	end,
 }
 
