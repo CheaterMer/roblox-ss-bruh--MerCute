@@ -1,3 +1,7 @@
+--// Made by Lord.#9999
+
+--// Use in the menu, and after you spawn just spam 6 so you get the souls already
+
 --[[ CONTROLS:
 0: Change form when you have a soul selected (third phase)
 1: Determination 1 slash (yes, everytime you press 1 the determination 1 slash will get fired, cause why not?)
@@ -80,7 +84,7 @@ local debounce = false
 local notyet = false
 local sparing = {}
 local keys = {[Enum.KeyCode.W]=true,[Enum.KeyCode.A]=true,[Enum.KeyCode.S]=true,[Enum.KeyCode.D]=true}
-local destroy = {DrainStamina=true,DrainSprint=true,Debounce=true,Hit=true,InvDeleting=false,PerfectBlockCD=false,Inv=false}
+local destroy = {DrainStamina=true,DrainSprint=true,Debounce=true,Hit=true,InvDeleting=true,PerfectBlockCD=true,Inv=true}
 local cooldown = false
 local killaura = true
 local killAura = true
@@ -1112,6 +1116,11 @@ local function start(a) -- other people combat
 					sak = 0
 				end
 			end)
+			killAura = false
+			task.wait(.08)
+			cooldown = false
+			killAura = false
+			killAura = true
 		elseif i.KeyCode == Enum.KeyCode.P then
 			if combatStyle == "Chara" then
 				combatStyle = "IDK"
@@ -1175,6 +1184,7 @@ end
 local bruhhhhh = Instance.new("Animation")
 bruhhhhh.AnimationId = "rbxassetid://4456901030"
 local inputBegan = {
+
 	[Enum.KeyCode.KeypadZero] = function()
 		if not debounce then
 			debounce = true
@@ -1260,43 +1270,17 @@ local inputBegan = {
 	[Enum.KeyCode.R] = function()
 		teleport()
 	end,
-	[Enum.KeyCode.C] = function()
-		if not debounce then
-			debounce = true
-			playSound(rep.Resources.Sounds.Moves.SpecialHell2.Fire,9)
-			local pos
-			if main.LockOnScript.LockOn.Value then
-				pos = main.LockOnScript.LockOn.Value.Torso.Position
-			else
-				pos = mouse.Hit.p
-			end
-			for i=1,10 do
-				pcall(function()
-					charaMoves:InvokeServer({ pass , "KnifeProjectilePurple", "Spawn", pos});
-				end)
-				task.wait(.16)
-				pcall(function()
-					charaMoves:InvokeServer({pass,"KnifeProjectileDarkRed","Spawn",pos})
-				end)
-				task.wait(.16)
-			end
-			debounce = false
-		end
-	end,
-	[Enum.KeyCode.V] = function()
-		charaMoves:InvokeServer({pass,"DTShield"})
-		if not hideEntire then
-			charaMoves:InvokeServer({pass,"KnifeShield",true})
-			wait(6)
-			charaMoves:InvokeServer({pass,"KnifeShield",false})
-		end
-	end,
 	[Enum.KeyCode.B] = function()
 		if plr.Backpack.Main.LockOnScript.LockOn.Value then
 			local c = plr.Backpack.Main.LockOnScript.LockOn.Value
 			charaMoves:InvokeServer({pass,"PatienceAttack",c.HumanoidRootPart.Position,c})
 			charaMoves:InvokeServer({pass,"PatienceAttack2",c.HumanoidRootPart.Position,c})
 		end
+	end,
+	[Enum.KeyCode.M] = function()
+		coroutine.resume(coroutine.create(function()
+			charaMoves:InvokeServer({pass,"SpecialHell2"})
+		end))
 	end,
 	[Enum.KeyCode.G] = function()
 		coroutine.resume(coroutine.create(function()
@@ -1327,14 +1311,19 @@ local inputBegan = {
 			Duration = 3;
 		})
 	end,
-	[Enum.KeyCode.M] = function()
-		coroutine.resume(coroutine.create(function()
-			charaMoves:InvokeServer({pass,"SpecialHell2"})
-		end))
-	end,
-	[Enum.KeyCode.KeypadThree] = function()
-		if not lolwings then
-			charaMoves:InvokeServer({pass,"KnifeHeal"})
+	[Enum.KeyCode.K] = function()
+		if killaura and knockBaack then
+			killaura = false
+			killAura = false
+			knockBaack = false
+			chat("[KILL_AURA]: FALSE")
+		elseif not killaura and not knockBaack then
+			killaura = true
+			killAura = true
+			chat("[KILL_AURA]: TRUE")
+		elseif killaura and not knockBaack then
+			knockBaack = true
+			chat("[KNOCKBACK]: TRUE")
 		end
 	end,
 	[Enum.KeyCode.L] = function()
@@ -1345,6 +1334,11 @@ local inputBegan = {
 		end
 		plr.Character.Humanoid.Health = b
 		plr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Freefall)
+	end,
+	[Enum.KeyCode.KeypadThree] = function()
+		if not lolwings then
+			charaMoves:InvokeServer({pass,"KnifeHeal"})
+		end
 	end,
 }
 
@@ -1369,7 +1363,7 @@ uis.InputBegan:Connect(function(i,s)
 	end
 end)
 
-local chatDeb = true
+local chatDeb = false
 local animsIds = {
 	Idle = "rbxassetid://4900761581",
 	Walk = "rbxassetid://4370512420",
@@ -1718,7 +1712,11 @@ local function playMusic(playlist) -- unused cause patched
 	clearMusics()
 	playSound(rep.Resources.Character.CustomMusic.My[playlist]["1Bunny"])
 end
-
+local fakeBlock = Instance.new("Part")
+fakeBlock.Anchored = true
+fakeBlock.Size = Vector3.new(2000,20,20000)
+fakeBlock.Parent = rep
+local fakeThing = {Transparency = 0,Parent = workspace.Map, Material = "Neon", Color = fakeBlock.Color, BrickColor = fakeBlock.BrickColor, Name = "Part"}
 pcall(function()
 	coroutine.resume(coroutine.create(function()
 		local module = rep:WaitForChild("ClientModules"):WaitForChild("MainModule")
@@ -1908,7 +1906,7 @@ plr.CharacterAdded:Connect(function(char)
 		end
 	end)
 	functions:InvokeServer({pass,"ChangeSetting","DeathScene",false})
-	chat("Execute = hack [True]")
+	chat("{Execute = Hack} [TRUE]")
 	spawn(function()
 		repeat wait(1) until testThis() == true
 	end)
@@ -2289,7 +2287,7 @@ plr.CharacterAdded:Connect(function(char)
 					end
 				end
 			end))
-			chat("Good luck.",Color3.new(1,0,0))
+			chat("Good luck.")
 			tweenS:Create(ui.StaminaBar.Bar,TweenInfo.new(1),{BackgroundColor3 = Color3.new(1,0,0)}):Play()
 
 			task.wait(1)
@@ -2456,7 +2454,7 @@ plr.CharacterAdded:Connect(function(char)
 				events:FireServer({pass, "SlashEffect", module.Animations.Slash.Swing1,currentColor ,CFrame.new(0,0,-1) * CFrame.Angles(0,0,math.rad(math.random(-360,360)))});
 				task.wait(.04)
 			end
-			chat("I have been holding back.",Color3.new(0,0,0))
+			chat("I have been holding back.")
 			haha = 70
 			currentColor = Color3.new(0,0,0)
 			destroy["HeartLocket"]=true
@@ -2618,222 +2616,371 @@ pcall(function()
 end)
 
 game.StarterGui:SetCore("SendNotification", {
-	Title = "test";
+	Title = "Script by Lord.#9999";
 	Text = "Goodbye SoulShatters :wave:";
 	Duration = 5;
 })
 
+--// Wings part
+if lolwings then
+	repeat task.wait() until plr.Character
+	task.wait(2)
+	local vt=Vector3.new
+	local cf=CFrame.new
+	local euler=CFrame.fromEulerAnglesXYZ
+	local angles=CFrame.Angles
+	local sine = 0
+	local change = 1
+	local function CreateWeld(parent,part0,part1,C1X,C1Y,C1Z,C1Xa,C1Ya,C1Za,C0X,C0Y,C0Z,C0Xa,C0Ya,C0Za)
+		local weld = Instance.new("Weld")
+		weld.Parent = parent
+		weld.Part0 = part0
+		weld.Part1 = part1
+		weld.C1 = CFrame.new(C1X,C1Y,C1Z)*CFrame.Angles(C1Xa,C1Ya,C1Za)
+		weld.C0 = CFrame.new(C0X,C0Y,C0Z)*CFrame.Angles(C0Xa,C0Ya,C0Za)
+		return weld
+	end
+	local function clerp(a,b,t)
+		return a:lerp(b,t)
+	end
+	local function CreateParta(parent,transparency,reflectance,material,brickcolor)
+		local p = Instance.new("Part")
+		p.TopSurface = 0
+		p.BottomSurface = 0
+		p.Transparency = 1
+		p.Parent = parent
+		p.Size = Vector3.new(0.1,0.1,0.1)
+		p.Reflectance = reflectance
+		p.CanCollide = false
+		p.Locked = true
+		p.BrickColor = brickcolor
+		p.Material = material
+		return p
+	end
+	local char = plr.Character
+	local maincolor = BrickColor.new("Really red")
+	local m = Instance.new("Model",char)
+	local m2 = Instance.new("Model",char)
+	local m3 = Instance.new("Model",char)
+	local mw1 = Instance.new("Model",char)
+	local mw2 = Instance.new("Model",char)
+	local handlex = CreateParta(mw2,1,1,"Neon",maincolor)
+	local handlexweld = CreateWeld(handlex,char.Torso,handlex,0,-1.5,-1.05,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	local extrawingmod1 = Instance.new("Model",char)
+	local extrawingmod2 = Instance.new("Model",char)
+	local handle = CreateParta(m,1,1,"Neon",maincolor)
+	local handleweld = CreateWeld(handle,char:WaitForChild("Torso"),handle,0,-1.5,-1.05,math.rad(0),math.rad(0),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	local lwing1 = CreateParta(m,1,1,"Neon",maincolor)
+	local lwing1weld = CreateWeld(lwing1,handle,lwing1,3,0,0,math.rad(5),math.rad(0),math.rad(12.5),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing1,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing1,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A0 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing1,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A1 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing1,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	tl1 = Instance.new('Trail',wed)
+	tl1.Attachment0 = A0
+	tl1.Attachment1 = A1
+	--tl1.Texture = "http://www.roblox.com/asset/?id=1049219073"
+	tl1.LightEmission = 1
+	tl1.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
+	tl1.Color = ColorSequence.new(BrickColor.new('Black').Color)
+	tl1.Lifetime = 0.6
 
 
+	local lwing2 = CreateParta(m,1,1,"Neon",maincolor)
+	local lwing2weld = CreateWeld(lwing2,handle,lwing2,4,1,0,math.rad(10),math.rad(0),math.rad(25),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing2,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing2,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A0 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing2,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A1 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing2,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	tl2 = Instance.new('Trail',wed)
+	tl2.Attachment0 = A0
+	tl2.Attachment1 = A1
+	--tl2.Texture = "http://www.roblox.com/asset/?id=1049219073"
+	tl2.LightEmission = 1
+	tl2.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
+	tl2.Color = ColorSequence.new(BrickColor.new('Black').Color)
+	tl2.Lifetime = 0.6
+
+	local lwing3 = CreateParta(m,1,1,"Neon",maincolor)
+	local lwing3weld = CreateWeld(lwing3,handle,lwing3,4.75,2,0,math.rad(15),math.rad(0),math.rad(37.5),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing3,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing3,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A0 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing3,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A1 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing3,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	tl3 = Instance.new('Trail',wed)
+	tl3.Attachment0 = A0
+	tl3.Attachment1 = A1
+	--tl3.Texture = "http://www.roblox.com/asset/?id=1049219073"
+	tl3.LightEmission = 1
+	tl3.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
+	tl3.Color = ColorSequence.new(BrickColor.new('Black').Color)
+	tl3.Lifetime = 0.6
+
+	tl1.Enabled = false
+	tl2.Enabled = false
+	tl3.Enabled = false
+	local lwing4 = CreateParta(m,1,1,"Neon",maincolor)
+	local lwing4weld = CreateWeld(lwing4,handle,lwing4,5.75,3,0,math.rad(20),math.rad(0),math.rad(50),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing4,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing4,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing4,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing4,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	local lwing5 = CreateParta(m,1,1,"Neon",maincolor)
+	local lwing5weld = CreateWeld(lwing5,handle,lwing5,6.75,4,0,math.rad(25),math.rad(0),math.rad(62.5),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing5,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing5,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing5,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing5,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	local lwing6 = CreateParta(m,1,1,"Neon",maincolor)
+	local lwing6weld = CreateWeld(lwing6,handle,lwing6,7.75,5,0,math.rad(30),math.rad(0),math.rad(75),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing6,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing6,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing6,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod1,0,0,"Neon",maincolor)
+	CreateWeld(wed,lwing6,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	-- Right wing.
+
+	local rwing1 = CreateParta(m,1,1,"Neon",maincolor)
+	local rwing1weld = CreateWeld(rwing1,handle,rwing1,-3,0,0,math.rad(5),math.rad(0),math.rad(-12.5),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing1,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A0 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing1,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing1,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing1,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A1 = Instance.new('Attachment',wed)
+
+	tr1 = Instance.new('Trail',wed)
+	tr1.Attachment0 = A0
+	tr1.Attachment1 = A1
+	--tr1.Texture = "http://www.roblox.com/asset/?id=1049219073"
+	tr1.LightEmission = 1
+	tr1.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
+	tr1.Color = ColorSequence.new(BrickColor.new('Black').Color)
+	tr1.Lifetime = 0.6
+
+	local rwing2 = CreateParta(m,1,1,"Neon",maincolor)
+	local rwing2weld = CreateWeld(rwing2,handle,rwing2,-4,1,0,math.rad(10),math.rad(0),math.rad(-25),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing2,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A0 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing2,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing2,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing2,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A1 = Instance.new('Attachment',wed)
+
+	tr2 = Instance.new('Trail',wed)
+	tr2.Attachment0 = A0
+	tr2.Attachment1 = A1
+	--tr2.Texture = "http://www.roblox.com/asset/?id=1049219073"
+	tr2.LightEmission = 1
+	tr2.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
+	tr2.Color = ColorSequence.new(BrickColor.new('Black').Color)
+	tr2.Lifetime = 0.6
+
+	local rwing3 = CreateParta(m,1,1,"Neon",maincolor)
+	local rwing3weld = CreateWeld(rwing3,handle,rwing3,-4.75,2,0,math.rad(15),math.rad(0),math.rad(-37.5),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing3,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A0 = Instance.new('Attachment',wed)
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing3,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing3,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(mw2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing3,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	A1 = Instance.new('Attachment',wed)
+
+	tr3 = Instance.new('Trail',wed)
+	tr3.Attachment0 = A0
+	tr3.Attachment1 = A1
+	--tr3.Texture = "http://www.roblox.com/asset/?id=1049219073"
+	tr3.LightEmission = 1
+	tr3.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0),NumberSequenceKeypoint.new(1, 1)})
+	tr3.Color = ColorSequence.new(BrickColor.new('Black').Color)
+	tr3.Lifetime = 0.6
 
 
---그외 스킬
+	local rwing4 = CreateParta(m,1,1,"Neon",maincolor)
+	local rwing4weld = CreateWeld(rwing4,handle,rwing4,-5.75,3,0,math.rad(20),math.rad(0),math.rad(-50),0,0,0,math.rad(0),math.rad(0),math.rad(0))
 
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing4,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing4,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing4,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing4,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	local rwing5 = CreateParta(m,1,1,"Neon",maincolor)
+	local rwing5weld = CreateWeld(rwing5,handle,rwing5,-6.75,4,0,math.rad(25),math.rad(0),math.rad(-62.5),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing5,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing5,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing5,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing5,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	local rwing6 = CreateParta(m,1,1,"Neon",maincolor)
+	local rwing6weld = CreateWeld(rwing6,handle,rwing6,-7.75,3,0,math.rad(30),math.rad(0),math.rad(-75),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing6,wed,0,0,0.25,math.rad(0),math.rad(90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing6,wed,0,0,0.25,math.rad(0),math.rad(-90),math.rad(0),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing6,wed,0,-0.25,1.75,math.rad(0),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	wed = CreateParta(extrawingmod2,0,0,"Neon",maincolor)
+	CreateWeld(wed,rwing6,wed,0,-1.75,0.25,math.rad(90),math.rad(90),math.rad(90),0,0,0,math.rad(0),math.rad(0),math.rad(0))
+	repeat task.wait() until plr.Character.Humanoid.MaxHealth == 200
+	task.wait(5)
+	setWings = true
+	for i=1,2 do
+		charaMoves:InvokeServer({pass,"KnifeProjectileDarkRed","Spawn",plr.Character.HumanoidRootPart.CFrame.UpVector * 2000})
+		task.wait()
+	end
+	repeat task.wait() until #wings == 8
+	for i=1,2 do
+		charaMoves:InvokeServer({ pass , "KnifeProjectileOrange", "Spawn",plr.Character.HumanoidRootPart.CFrame.UpVector * 2000})
+		task.wait()
+	end
+	repeat task.wait() until #wings == 10
+	charaMoves:InvokeServer({ pass , "KnifeProjectileYellow", "Spawn",plr.Character.HumanoidRootPart.CFrame.UpVector * 2000})
+	repeat task.wait() until #wings == 11
+	setWings = false
+	local wing1 = wings[1]
+	wing1.Name = "Wing"
+	wing1.Parent = char
+	local wing2 = wings[2]
+	wing2.Name = "Wing"
+	wing2.Parent = char
+	local wing3 = wings[3]
+	wing3.Name = "Wing"
+	wing3.Parent = char
+	local wing4 = wings[4]
+	wing4.Name = "Wing"
+	wing4.Parent = char
+	local wing5 = wings[5]
+	wing5.Name = "Wing"
+	wing5.Parent = char
+	local wing6 = wings[6]
+	wing6.Name = "Wing"
+	wing6.Parent = char
+	local wing7 = wings[7]
+	wing7.Name = "Wing"
+	wing7.Parent = char
+	local wing8 = wings[8]
+	wing8.Name = "Wing"
+	wing8.Parent = char
+	local wing9 = wings[9]
+	wing9.Name = "Wing"
+	wing9.Parent = char
+	local wing10 = wings[10]
+	wing10.Name = "Wing"
+	wing10.Parent = char
+	local orb = wings[11]
+	orb.Name = "Orb"
+	orb.Parent = char
+	while true do
+		task.wait()
+		lwing1weld.C1=clerp(lwing1weld.C1,cf(2,0,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(5 + 10 * math.cos(sine / 32)),math.rad(0),math.rad(12.5 + 5 * math.cos(sine / 32))),.3)
+		lwing2weld.C1=clerp(lwing2weld.C1,cf(3,1,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(10 + 15 * math.cos(sine / 32)),math.rad(0),math.rad(25 + 7.5 * math.cos(sine / 32))),.3)
+		lwing3weld.C1=clerp(lwing3weld.C1,cf(3.75,2,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(15 + 20 * math.cos(sine / 32)),math.rad(0),math.rad(37.5 + 10 * math.cos(sine / 32))),.3)
+		lwing4weld.C1=clerp(lwing4weld.C1,cf(4.75,3,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(20 + 25 * math.cos(sine / 32)),math.rad(0),math.rad(50 + 12.5 * math.cos(sine / 32))),.3)
+		lwing5weld.C1=clerp(lwing5weld.C1,cf(5.75,4,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(25 + 30 * math.cos(sine / 32)),math.rad(0),math.rad(62.5 + 15 * math.cos(sine / 32))),.3)
+		lwing6weld.C1=clerp(lwing6weld.C1,cf(6.75,5,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(30 + 35 * math.cos(sine / 32)),math.rad(0),math.rad(75 + 17.5 * math.cos(sine / 32))),.3)
+
+		rwing1weld.C1=clerp(rwing1weld.C1,cf(-2,0,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(5 + 10 * math.cos(sine / 32)),math.rad(0),math.rad(-12.5 - 5 * math.cos(sine / 32))),.3)
+		rwing2weld.C1=clerp(rwing2weld.C1,cf(-3,1,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(10 + 15 * math.cos(sine / 32)),math.rad(0),math.rad(-25 - 7.5 * math.cos(sine / 32))),.3)
+		rwing3weld.C1=clerp(rwing3weld.C1,cf(-3.75,2,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(15 + 20 * math.cos(sine / 32)),math.rad(0),math.rad(-37.5 - 10 * math.cos(sine / 32))),.3)
+		rwing4weld.C1=clerp(rwing4weld.C1,cf(-4.75,3,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(20 + 25 * math.cos(sine / 32)),math.rad(0),math.rad(-50 - 12.5 * math.cos(sine / 32))),.3)
+		rwing5weld.C1=clerp(rwing5weld.C1,cf(-5.75,4,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(25 + 30 * math.cos(sine / 32)),math.rad(0),math.rad(-62.5 - 15 * math.cos(sine / 32))),.3)
+		rwing6weld.C1=clerp(rwing6weld.C1,cf(-6.75,5,0)*angles(math.rad(0),math.rad(0),math.rad(0))*angles(math.rad(30 + 35 * math.cos(sine / 32)),math.rad(0),math.rad(-75 - 17.5 * math.cos(sine / 32))),.3)
+		sine = sine + change
+		wing1.CFrame = lwing1.CFrame * CFrame.Angles(math.rad(90),0,0)
+		wing2.CFrame = lwing2.CFrame * CFrame.Angles(math.rad(90),0,0)
+		wing3.CFrame = lwing3.CFrame * CFrame.Angles(math.rad(90),0,0)
+		wing4.CFrame = lwing4.CFrame * CFrame.Angles(math.rad(90),0,0)
+		wing5.CFrame = rwing1.CFrame * CFrame.Angles(math.rad(90),0,0)
+		wing6.CFrame = rwing2.CFrame * CFrame.Angles(math.rad(90),0,0)
+		wing7.CFrame = rwing3.CFrame * CFrame.Angles(math.rad(90),0,0)
+		wing8.CFrame = rwing4.CFrame * CFrame.Angles(math.rad(90),0,0)
+		if secondPhase then
+			wing9.CFrame = rwing5.CFrame * CFrame.Angles(math.rad(90),0,0)
+			wing10.CFrame = lwing5.CFrame * CFrame.Angles(math.rad(90),0,0)
+			orb.CFrame = handlex.CFrame * CFrame.new(0,0.6,0)
+		else
+			wing9.CFrame = CFrame.new(0,10000,0)
+			wing10.CFrame = CFrame.new(0,10000,0)
+			orb.CFrame = CFrame.new(0,10000,0)
+		end
+		--wing11.CFrame = rwing5.CFrame * CFrame.Angles(math.rad(90),0,0)
+		--wing12.CFrame = rwing6.CFrame * CFrame.Angles(math.rad(90),0,0)
+	end
+end
 
 
 local mouse = game.Players.LocalPlayer:GetMouse()
-mouse.KeyDown:Connect(function(k)
-	if k == "n" then
+mouse.KeyDown:Connect(function(k) 
+	if k == "z" then
 	
-				local Event = game:GetService("ReplicatedStorage").Remotes.Damage
-				Event:InvokeServer(A_1, A_2, A_3)
-                wait(0.30)
-                                local Anim = Instance.new("Animation")
-                Anim.AnimationId = "rbxassetid://4532642774"
-                local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
-                k:Play()
-                k:AdjustSpeed(0.90)
-                    for i = 1,10 do
-                spawn(function()
-                for i = 1,3 do
-                local A_1 = getrenv()._G.Pass
-				local A_2 = game:GetService("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
-				local A_3 = 
-					{
-						["HitTime"] = 0.1, 
-						["Type"] = "Knockback", 
-						["HitEffect"] = "KnifeHitEffect",
-						["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback2,
-						["Sound"] = game:GetService("ReplicatedStorage").Sounds.AreaAttackBurst,
-						["Velocity"] = Vector3.new(0, 0.1, 0), 
-						["CombatInv"] = true,
-						["Damage"] = 20
-					}
-				local Event = game:GetService("ReplicatedStorage").Remotes.Damage
-				Event:InvokeServer(A_1, A_2, A_3)
-                end
-                end)
-                wait(0.2)
-                end
-                wait(0.10)
-                game.Players.LocalPlayer.Character.Humanoid.HipHeight = 0
-                end
-                end)
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				local userInputService = game:GetService("UserInputService")
 
-game:GetService("UserInputService").InputBegan:Connect(function(inp)
-    if inp.KeyCode == Enum.KeyCode.KeypadNine then
-
-
-
-on = true
-posz = 0
-posx = 0
-    times = 0
-    
-_G.closed = true
-local effects = game.Players.LocalPlayer.Character.Effects
-local rs = game:GetService("RunService")
-
-        local player = game.Players.LocalPlayer
-local Character = player.Character
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Spawn",
-        [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector *10 + Vector3.new(math.random(0,35),math.random(0,30),math.random(0,33))
-    }
-}
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Spawn",
-        [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector *10 + Vector3.new(math.random(0,35),math.random(0,30),math.random(0,33))
-    }
-}
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Spawn",
-        [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector *10 + Vector3.new(math.random(0,35),math.random(0,30),math.random(0,33))
-    }
-}
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Spawn",
-        [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector *10 + Vector3.new(math.random(0,35),math.random(0,30),math.random(0,33))
-    }
-}
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Spawn",
-        [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector *10 + Vector3.new(math.random(0,35),math.random(0,30),math.random(0,33))
-    }
-}
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Spawn",
-        [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector *10 + Vector3.new(math.random(0,35),math.random(0,30),math.random(0,33))
-    }
-}
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Spawn",
-        [4] = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector *10 + Vector3.new(math.random(0,35),math.random(0,30),math.random(0,33))
-    }
-}
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
-
-local projectiles = game.Players.LocalPlayer.Character.Attacks
-
-_G.closed = false
-for i,v in pairs(projectiles:GetChildren()) do
-if v.Name == "KnifeSlashProjectileOrange" or "Removing" then
-    v:WaitForChild("BodyVelocity"):Destroy()
-    v:WaitForChild("ParticleEmitter"):Destroy()
-    
-local detect
-detect = rs.Heartbeat:Connect(function()
-    if _G.closed then
-        detect:Disconnect()
-        end
-    times = times + 1
-    if 
-    times == 6
-    then 
-    times = 0
-    end
-    if times == 1 then
-v.Position = Character.HumanoidRootPart.Position - Vector3.new(0,9,0)
-elseif times == 2 then
-    v.Position = Character.HumanoidRootPart.Position - Vector3.new(10,9,0)
-elseif times == 3 then
-    v.Position = Character.HumanoidRootPart.Position - Vector3.new(0,9,10)
-elseif times == 4 then
-    v.Position = Character.HumanoidRootPart.Position - Vector3.new(0,9,-10)
-elseif times == 5 then
-    v.Position = Character.HumanoidRootPart.Position - Vector3.new(-10,9,0)
-    end
-local args2 = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "KnifeProjectileOrange",
-        [3] = "Hit",
-        [4] = v,
-        [5] = v.CFrame,
-        [6] = workspace.Terrain
-    }
-}
-
-game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args2))
-
-
-end)
-end
-end
-
-
-
-
-
-end
-end)
-
-local debounce = true 
-local cooldown = 0
-game:GetService("UserInputService").InputBegan:Connect(function(key, typing) 
-    if typing then return end 
-    local button = Enum.KeyCode.Z
-    if key.KeyCode == button then
-       if debounce then 
-          print("combo pro") 
-          debounce = false
 local Anim = Instance.new("Animation")
 Anim.AnimationId = "rbxassetid://4820780935"
 local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
@@ -2919,15 +3066,12 @@ wait(0.1)
         ["HitEffect"] = "BurstEffect",
         ["CombatInv"] = true,
         ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback3, 
-        ["Velocity"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 100, 
+        ["Velocity"] = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 0, 
         ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Knockback,
         ["Damage"] = 40
     }
 }
 
-game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
-          wait(cooldown)
-          debounce = true            
-       end
+game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))         
     end
 end)
