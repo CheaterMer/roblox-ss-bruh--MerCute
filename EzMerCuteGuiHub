@@ -4621,11 +4621,11 @@ uiSecs.custom:addButton(
 )
 
 uiSecs.custom:addButton(
-    "Chara The Fallen Child",
+    "Maid Chara",
     function()
         loadstring(
             game:HttpGet(
-                "https://gist.githubusercontent.com/LiterallyATrueClown/13f7a6171be730091670f2696f649ab0/raw/65819372dcd4df01e6507dab222347a2fa7fe30b/Ehh",
+                "https://raw.githubusercontent.com/CheaterMer/roblox-ss-bruh--MerCute/main/maid",
                 true
             )
         )()
