@@ -1,42 +1,5 @@
-local keys = {
-    "Wehg9iwerhajkhiew4h488hdfskizjh4r8wereguydsfgoiuew",
-    "Key2",
-    "key3"
-}
-
-local counter = 1
-local keyCheck
-for i,v in pairs(keys) do
-    if counter == #keys then
-    --not whitelisted!
-    keys = ""
-    game.Players.LocalPlayer:Kick("키 입력을 안하네? 시발련이? 디질래?")
-    else
-        if v == _G.Key then
-            --Whitelisted!
-	    main()
-            print("Successfully whitelisted!")
-            keyCheck = _G.Key
-            keys = ""
-        else
-            counter = counter +1
-        end
-    end
-end
-
-while true do
-    if _G.Key == keyCheck then
-        --Not spoofed
-    else
-        game.Players.LocalPlayer:Kick("어 그거 아니야 끄져병신아 ㅋㅋㅋㅋ")
-    end
-    wait()
-end
-
-function main()
-
 local library =
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/GreenDeno/Venyx-UI-Library/main/source.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GreenDeno/Venyx-UI-Library/main/source.lua"))()
 local venyx = library.new("MerCute - Hub")
 
 local themes = {
@@ -4769,5 +4732,3 @@ section1:addKeybind(
         venyx:toggle()
     end
 )
-
-end
