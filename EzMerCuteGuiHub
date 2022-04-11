@@ -32,7 +32,6 @@ while true do
     wait()
 end
 
-wait(5)
 
 local library =
     loadstring(game:HttpGet("https://raw.githubusercontent.com/GreenDeno/Venyx-UI-Library/main/source.lua"))()
