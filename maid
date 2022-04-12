@@ -12,6 +12,13 @@ local main
 local plr = plrs.LocalPlayer
 local plrGui = plr:WaitForChild("PlayerGui")
 local char = plr.Character
+sdis = false
+count = 0
+local done = {}
+local pass = 0
+local dead = 0
+local first = true
+local looped = 0
 
 game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
 game.Players.LocalPlayer.PlayerGui.CharacterSelection.Character.Value = "Chara"
@@ -188,7 +195,11 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 
 
 
-
+local music = Instance.new("Sound",game.Players.LocalPlayer:WaitForChild("StarterPlaylist"))
+music.Volume = 5
+music.SoundId = "rbxassetid://8608569869"
+music.Looped = false
+music:Play()
 
 
 --sit
@@ -1339,4 +1350,22 @@ spawn(function()
         wait()
         end
     end
+end)
+
+
+local mouse = game.Players.LocalPlayer:GetMouse()
+mouse.KeyDown:Connect(function(k)
+if k == "n" then 
+	
+local Sound = Instance.new("Sound")
+Sound.Parent = game.Players.LocalPlayer.StarterPlaylist
+Sound.Volume = 8
+Sound.Playing = true
+Sound.Looped = false
+Sound.SoundId = "rbxassetid://6515725987" 
+Sound.Name = "aa"
+
+
+
+end
 end)
