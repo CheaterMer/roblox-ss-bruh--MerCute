@@ -4633,11 +4633,11 @@ uiSecs.custom:addButton(
 )
 
 uiSecs.custom:addButton(
-    "Toxic 10 Years Old",
+    "anit Cheater",
     function()
         loadstring(
             game:HttpGet(
-                "https://raw.githubusercontent.com/LiterallyATrueClown/ClownThingies/main/Toxic_10_year_old_kid.txt",
+                "https://raw.githubusercontent.com/CheaterMer/roblox-ss-bruh--MerCute/main/antihax",
                 true
             )
         )()
@@ -4707,7 +4707,7 @@ uiSecs.custom3:addButton(
 
 uiSecs.Credit:addButton("Creator: Cheater_Mer#0489")
 uiSecs.Credit:addButton("Helper: Cheater_Mer")
-uiSecs.Credit:addButton("🖤Mer Cute Mer so sexy🖤")
+uiSecs.Credit:addButton("Mer Cute Mer so sexy")
 
 venyx:SelectPage(venyx.pages[1], true)
 local theme = venyx:addPage("Ui Change", 5012544693)
