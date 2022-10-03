@@ -11593,6 +11593,123 @@ end)
 
 -- 기타
 
+ local mouse = game.Players.LocalPlayer:GetMouse()
+                mouse.KeyDown:Connect(function(k) 
+                if k == "b" then 
+			if game.Players.LocalPlayer.PlayerGui.UI.Ui.Info.Attack.Text == "TheLast" then	
+
+local target = lock.Value
+if not target then return end
+if (target.HumanoidRootPart.Position - rootpart.Position).magnitude > 10000000 then return end
+
+
+ local args = {
+            [1] = getrenv()._G.Pass,
+            [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+            [3] = {
+                ["Type"] = "Knockback", 
+                ["HitTime"] = 1, 
+                ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback2, 
+                ["Velocity"] = Vector3.new(0,15,0),
+                ["HitEffect"] = "LightHitEffect", 
+                ["CombatInv"] = true, 
+                ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Knockback, 
+                ["Damage"] = 0
+            }
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
+
+local vec =  target.HumanoidRootPart.Position -rootpart.Position
+local direction = (vec).Unit
+local pos = rootpart.Position + direction*((vec).magnitude+5)
+rootpart.CFrame = CFrame.new(pos)
+char.Humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+tar = rootpart.CFrame*CFrame.new(0,12,0)
+char.Humanoid:ChangeState(Enum.HumanoidStateType.Flying)
+v2 = Instance.new('BodyPosition',rootpart) 
+fol = Instance.new('Folder',v2)
+v2.Name = 'Client' 
+v2.MaxForce = Vector3.new(1,1,1)*100000 
+v2.D = 4000 
+v2.P = 60000 
+v2.Position = (tar).p
+wait(.5)
+FWhiteFlash()
+
+
+
+ local A_1 = {
+            [1] = getrenv()._G.Pass,
+            [2] = "IntegrityAttack",
+            [3] = "Start"
+        }
+        local Event = game:GetService("ReplicatedStorage").Remotes.CharaMoves
+        Event:InvokeServer(A_1)
+		
+		v2:Destroy()
+		
+wait(0.3)	
+
+game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value.HumanoidRootPart.Size = Vector3.new(999, 999, 999)
+
+ local args = {
+            [1] = getrenv()._G.Pass,
+            [2] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+            [3] = {
+                ["Type"] = "Knockback", 
+                ["HitTime"] = 1, 
+                ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback2, 
+                ["Velocity"] = Vector3.new(0,15,0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * 50,
+                ["HitEffect"] = "LightHitEffect", 
+                ["CombatInv"] = true, 
+                ["Sound"] = game:GetService("ReplicatedStorage").Sounds.Knockback, 
+                ["Damage"] = 0
+            }
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))				
+
+				
+				wait(.3)
+				
+				 local A_1 = {
+            [1] = getrenv()._G.Pass,
+            [2] = "IntegrityAttack2",
+            [3] = "Start"
+        }
+        local Event = game:GetService("ReplicatedStorage").Remotes.CharaMoves
+        Event:InvokeServer(A_1)
+	
+	wait(.1)
+	
+				local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "PatienceAttack2",
+        [3] = Vector3.new(10000000000000000000, 1000000000000000000000, 1000000000000000000000),
+        [4] = game:service("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value,
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))	
+				
+wait(0.5)
+
+ local A_1 = {
+            [1] = getrenv()._G.Pass,
+            [2] = "YellowBeam",
+            [3] = "Fire"
+        }
+        local Event = game:GetService("ReplicatedStorage").Remotes.CharaMoves
+        Event:InvokeServer(A_1)
+		
+		game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value.HumanoidRootPart.Size = Vector3.new(1.6, 1.6, 0.8)
+		
+		end
+		end
+		end)
+
 -- admin script
 
 spawn(function()
