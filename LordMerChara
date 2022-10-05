@@ -87,10 +87,13 @@ game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
 game.Players.LocalPlayer.PlayerGui.CharacterSelection.Character.Value = "Chara"
 
 wait(1)
+--커스텀 모션
 
 game.Players.LocalPlayer.Backpack:WaitForChild("Main").CharaMoves.Animations.Walk.AnimationId = "rbxassetid://4457246944"
 game.Players.LocalPlayer.Backpack:WaitForChild("Main").CharaMoves.Animations.Idle.AnimationId = "rbxassetid://4457237823"
 game.Players.LocalPlayer.Backpack:WaitForChild("Main").CharaMoves.Animations.Run.AnimationId = "rbxassetid://7501695811"
+
+--아스리엘
 --[[
 game.Players.LocalPlayer.Backpack:WaitForChild("Main").CharaMoves.Animations.Walk.AnimationId = "rbxassetid://4196634355"
 game.Players.LocalPlayer.Backpack:WaitForChild("Main").CharaMoves.Animations.Idle.AnimationId = "rbxassetid://4652743075"
@@ -173,18 +176,18 @@ local animations = charaSc:WaitForChild("Animations")
 animationsFolder = animations
 
 sdis = false
+OrangeKillAura = false
+local test = true
+local test1 = false
+local test2 = false
+local first = true
+local asdferhkasf = false
+
 count = 0
 local done = {}
 local pass = 0
 local dead = 0
-local first = true
 local looped = 0
-
-local test = true
-local test1 = false
-local test2 = false
-
-local asdferhkasf = false
 
 local plrs = game:GetService("Players")
 local light = game:GetService("Lighting")
@@ -2624,7 +2627,7 @@ player.Chatted:Connect(function(mag, secipient)
             for _,PlayerTarget in pairs(Players:GetPlayers()) do
 		if string.sub(string.lower(PlayerTarget.Name),1,string.len(splitstring[2])) == string.lower(splitstring[2]) then
 		print(PlayerTarget)
-            local args = {
+local args = {
     [1] = {
         [1] = getrenv()._G.Pass,
         [2] = "KnifeProjectileOrange",
@@ -2787,6 +2790,8 @@ end
 end
 end)
 
+
+
 spawn(function()
 local ScreenGui = Instance.new("ScreenGui")
 local TextLabel = Instance.new("TextLabel")
@@ -2915,7 +2920,6 @@ TextLabel_10.TextStrokeTransparency = 0.000
 end)
 
 --Skill Range
-
 
 local inf = false
 
@@ -7213,6 +7217,151 @@ local Anim = Instance.new("Animation") Anim.AnimationId = "rbxassetid://" local 
 
 wait(0)
 
+
+
+
+
+local rightarm = game.Players.LocalPlayer.Character["Right Arm"]
+local part = Instance.new("Part")
+local mesh = Instance.new("SpecialMesh")
+local weld = Instance.new("WeldConstraint")
+part.Size = Vector3.new(0.9, 0.9, 0.9)
+part.CanCollide = false
+part.CanTouch = false
+part.CanQuery = false
+part.Color = Color3.fromRGB(99, 0, 0)
+mesh.MeshType = Enum.MeshType.FileMesh
+mesh.Scale = Vector3.new(0.6, 0.6, 0.6)
+mesh.Parent = part
+weld.Part0 = rightarm
+part.CFrame = rightarm.CFrame * CFrame.new(0,-2.7,-2) * CFrame.fromEulerAnglesXYZ(math.rad(-70), math.rad(90),math.rad(0)) -- Position
+weld.Part1 = part
+weld.Parent = part
+part.Parent = rightarm.Parent
+part.Name = "Reaper"
+part.Transparency = 1
+
+player = game.Players.LocalPlayer
+char = player.Character
+local TweenService = game:GetService("TweenService")
+_G.nowings = true
+--right
+part1 = Instance.new("Part")
+part1.Name = "part1"
+part1.Parent = char
+part1.Anchored = false
+part1.CanCollide = false
+part1.Transparency = 0.6
+
+ part2 = Instance.new("Part")
+part2.Name = "part2"
+part2.Parent = char
+part2.Anchored = false
+part2.CanCollide = false
+part2.Transparency = 0.6
+
+ part3 = Instance.new("Part")
+part3.Name = "part3"
+part3.Parent = char
+part3.Anchored = false
+part3.CanCollide = false
+part3.Transparency = 0.6
+--weldright
+
+ weld1 = Instance.new("Weld")
+weld1.Parent = char.HumanoidRootPart
+weld1.Part0 = char:FindFirstChild("Reaper")
+weld1.Part1 = part1
+weld1.C0 = CFrame.new(-0.3,4.4,0)*CFrame.Angles(0, 3, math.rad(-1))
+weld1.Name = "weld1"
+
+ weld2 = Instance.new("Weld")
+weld2.Parent = char.HumanoidRootPart
+weld2.Part0 = char:FindFirstChild("Reaper")
+weld2.Part1 = part2
+weld2.C0 = CFrame.new(-2,-4.2,0)*CFrame.Angles(0, 3, math.rad(-90))
+weld2.Name = "weld2"
+
+ weld3 = Instance.new("Weld")
+weld3.Parent = char.HumanoidRootPart
+weld3.Part0 = char:FindFirstChild("Reaper")
+weld3.Part1 = part3
+weld3.C0 = CFrame.new(-2,1,0)*CFrame.Angles(0, 3, math.rad(90))
+weld3.Name = "weld3"
+
+local welds = {weld1,weld2,weld3}
+
+        
+        
+        
+        
+
+spawn(function()
+local args = {
+   [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "KnifeProjectilePurple",
+        [3] = "Spawn",
+        [4] = Vector3.new(0, 3000, 0) 
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.CharaMoves:InvokeServer(unpack(args))
+end)
+
+ 
+local detect 
+local detect2
+local val = Instance.new('NumberValue',char)
+val.Name = 'Wingpartslashcount'
+local num = 0
+local tab = {}
+local tab2 = {}
+detect = char.Attacks.ChildAdded:Connect(function(child)
+    if child.Name == "KnifeSlashProjectilePurple" then
+        table.insert(tab,child)
+        child:WaitForChild("ParticleEmitter"):Destroy()
+        child:WaitForChild("BodyVelocity"):Destroy()
+local bp = Instance.new('BodyPosition',child)
+bp.Name = 'Client'
+bp.P = 30000
+bp.D = 150
+bp.Position = char.HumanoidRootPart.Position
+table.insert(tab2,bp)
+        num = num + 1
+        val.Value = num
+    end
+end)
+_G.nowings = false
+detect2 = val:GetPropertyChangedSignal("Value"):Connect(function(amo)
+if val.Value == 3 then
+    
+for i = 1,#tab do
+spawn(function()
+    local part = welds[i].Part1
+    local sl = tab[i]
+    local bs = tab2[i]
+    part.Transparency = 1
+while true do game['Run Service'].Heartbeat:wait()
+    if _G.nowings then break end
+    local cfr = part.CFrame*CFrame.Angles(0,math.rad(90),math.rad(180))
+bs.Position = cfr.p 
+sl.CFrame = cfr
+end
+part:Destroy()
+sl:Destroy()
+end)
+end
+detect:Disconnect()
+detect2:Disconnect()
+val:Destroy()
+
+end
+end)
+
+
+
+
 StarcreateClaws()
 
 
@@ -11044,7 +11193,7 @@ end
 end
 end)
 
-
+--c
 local mouse = game.Players.LocalPlayer:GetMouse()
 mouse.KeyDown:Connect(function(k) 
     if k == "c" then
@@ -11216,7 +11365,7 @@ event:InvokeServer(v1, v2, v3)
 end
 end
 end)
-
+--m
 local mouse = game.Players.LocalPlayer:GetMouse()
 mouse.KeyDown:Connect(function(k)
 if k == "m" then
@@ -11436,7 +11585,7 @@ game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
 end
 end
 end)
-
+--z
 local mouse = game.Players.LocalPlayer:GetMouse()
 mouse.KeyDown:Connect(function(k) 
 	if k == "z" then
@@ -11590,9 +11739,7 @@ end)
     end
 end
 end)
-
--- 기타
-
+--b
  local mouse = game.Players.LocalPlayer:GetMouse()
                 mouse.KeyDown:Connect(function(k) 
                 if k == "b" then 
@@ -11844,7 +11991,28 @@ game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves8["1"].Position
 game.Players.LocalPlayer.PlayerGui.UI.Ui.MoveDebounceShower.Moves8["2"].Position = UDim2.new(0.601, 0, -1, 0)
 end)
 --skill
-
+spawn(function()
+local phase = Instance.new('NumberValue')
+phase.Parent = game.Players.LocalPlayer.Character
+phase.Value = 0
+phase.Name = 'antifling'
+ local mouse = game.Players.LocalPlayer:GetMouse()
+                mouse.KeyDown:Connect(function(k) 
+                if k == "p" then 
+			if game.Players.LocalPlayer.PlayerGui.UI.Ui.Info.Attack.Text == "TheLast" then	
+if game.Players.LocalPlayer.Character.antifling.Value == 0 then
+game.Players.LocalPlayer.Character.antifling.Value = 0
+char = game.Players.LocalPlayer.Character
+        local vel = Instance.new('BodyVelocity',char.HumanoidRootPart)
+        vel.Name = 'Client'
+        vel.MaxForce = Vector3.new(4000,4000,4000)*math.huge
+        vel.P = math.huge
+        vel.Velocity = Vector3.new(0,0,0)
+end
+end
+end
+end)
+end)
 game.Players.LocalPlayer:WaitForChild("DeathPlaylist")
 game.Players.LocalPlayer.PlayerGui.UI.Ui.Info.Defense.Text = "Lvl = 2"
 
@@ -12557,33 +12725,6 @@ game.Workspace.tp:Destroy()
 game.Workspace.FlignPart:Destroy()
     end
 	end
-    end)
-
-local phase = Instance.new('NumberValue')
-phase.Parent = game.Players.LocalPlayer.Character
-phase.Value = 0
-phase.Name = 'antifling'
-game:GetService("UserInputService").InputBegan:Connect(function(inp)
-    if inp.KeyCode == Enum.KeyCode.KeypadEight then
-if game.Players.LocalPlayer.Character.antifling.Value == 0 then
-game.Players.LocalPlayer.Character.antifling.Value = 0
-local A_1 = {
-                        [1] = getrenv()._G.Pass,
-                        [2] = "Chatted",
-                        [3] = [[ [ CONSOLE ] *
-START SCRIPT {ANTIFLING}]],
-                        [4] = Color3.new(1,0,0)
-                    }
-local Event = game:GetService("ReplicatedStorage").Remotes.Events
-Event:FireServer(A_1)
-char = game.Players.LocalPlayer.Character
-        local vel = Instance.new('BodyVelocity',char.HumanoidRootPart)
-        vel.Name = 'Client'
-        vel.MaxForce = Vector3.new(4000,4000,4000)*math.huge
-        vel.P = math.huge
-        vel.Velocity = Vector3.new(0,0,0)
-end
-end
 end)
 end)
 --mode 2
