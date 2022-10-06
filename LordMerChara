@@ -223,9 +223,9 @@ workspace.FallenPartsDestroyHeight = "-nan"
 local changed = {}
 
 local animsIds = {
-	Idle = "rbxassetid://4495592637",
-	Walk = "rbxassetid://4196634355",
-	Run = "rbxassetid://4196684102",
+	Idle = "rbxassetid://5941649105",
+	Walk = "rbxassetid://5941655920",
+	Run = "rbxassetid://5941660121",
 }
 
 local secondPhaseAnims = {
@@ -534,7 +534,7 @@ end
 local StarGlitcher = CreateInstance('ScreenGui',{DisplayOrder=0,Enabled=true,ResetOnSpawn=true,Name='StarGlitcher', Parent=game.CoreGui})
 local Frame = CreateInstance('Frame',{Style=Enum.FrameStyle.Custom,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.new(1, 1, 1),BackgroundTransparency=1,BorderColor3=Color3.new(0.105882, 0.164706, 0.207843),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.0287443269, 0, 0.506766915, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 212, 0, 79),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=1,Name = 'Frame',Parent = StarGlitcher})
 local TextLabel = CreateInstance('TextLabel',{Font=Enum.Font.Arcade,FontSize=Enum.FontSize.Size14,Text='Label',TextColor3=Color3.new(226, 226, 0),TextScaled=true,TextSize=14,TextStrokeColor3=Color3.new(0, 0, 0),TextStrokeTransparency=1,TextTransparency=0,TextWrapped=true,TextXAlignment=Enum.TextXAlignment.Center,TextYAlignment=Enum.TextYAlignment.Center,Active=false,AnchorPoint=Vector2.new(0, 0),BackgroundColor3=Color3.new(1, 1, 1),BackgroundTransparency=1,BorderColor3=Color3.new(226, 226, 0),BorderSizePixel=1,ClipsDescendants=false,Draggable=false,Position=UDim2.new(0.000104115, 0, 0.832668614, 0),Rotation=0,Selectable=false,Size=UDim2.new(0, 200, 0, 50),SizeConstraint=Enum.SizeConstraint.RelativeXY,Visible=true,ZIndex=1,Name='TextLabel',Parent = Frame})
-
+--[[
 light.Brightness = 2
 light.Ambient = Color3.fromRGB(100,100,100)
 light.OutdoorAmbient = Color3.fromRGB(150,150,150)
@@ -543,7 +543,7 @@ light.Bloom.Intensity = 1
 light.ColorCorrection.Brightness = 0
 light.ColorCorrection.Contrast = 0.1
 light.ColorCorrection.Saturation = 0.2
-
+]]
 local CameraShaker = require(rep.ClientModules.CameraShaker)
 
 local camera = game.Workspace.CurrentCamera
@@ -7288,9 +7288,6 @@ userInputService.InputBegan:Connect(function(input,gameProcessedEvent)
           if keyPressed == Enum.KeyCode.X then
 		  if game.Players.LocalPlayer.PlayerGui.UI.Ui.Info.Attack.Text == "Star Glitcher" then
               if ModeBind == 9 then
-local Anim = Instance.new("Animation") Anim.AnimationId = "rbxassetid://" local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim) k:Play() k:AdjustSpeed(1)
-
-wait(0)
 
 
 
@@ -7305,13 +7302,8 @@ wait(0)
 
 
 createReaper()
-wait(2)
 
-        		    local Anim = Instance.new("Animation")
-        Anim.AnimationId = "rbxassetid://5093205779"
-        local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
-        k:Play()
-        k:AdjustSpeed(1)
+
 
 StarcreateClaws()
 
@@ -11951,7 +11943,7 @@ local args = {
 ["HitEffect"] = "HeavyHitEffect",
 ["HurtAnimation"] = game:GetService("ReplicatedStorage").Animations.HurtAnimations.Knockback2,
 ["HitTime"] = 1,
-["Velocity"] = Vector3.new(0,50,.01),
+["Velocity"] = Vector3.new(0,0,.01),
 ["CombatInv"] = true,
 ["Sound"] = d1,
 ["BlockAble"] = false,
@@ -11962,8 +11954,6 @@ local args = {
 game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
 
 wait(0.5)
-
-game.Players.LocalPlayer.Character.Humanoid.HipHeight = 40
 
 local args = {
 [1] = getrenv()._G.Pass,
@@ -12003,12 +11993,6 @@ local args = {
 }
 }
 game:GetService("ReplicatedStorage").Remotes.Damage:InvokeServer(unpack(args))
-
-
-
-
-game.Players.LocalPlayer.Character.Humanoid.HipHeight = 80
-
 
 
 
@@ -12125,8 +12109,8 @@ _G.cdr = false
 					r2 = m.Hit
 					r1 = m.Target
 				end
-				x = math.random(-150, 150)
-				z = math.random(-150, 150)
+				x = math.random(-20, 20)
+				z = math.random(-20, 20)
 				tab[i].D = 150
 				tab[i].Position = r2.p + Vector3.new(0, -1, 0)
 				tab2[i].CFrame = r2 * CFrame.new(x, 10, z)
