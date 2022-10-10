@@ -1,7 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "Cheater_Mer's Gui", HidePremium = false, SaveConfig = true, ConfigFolder = "Soul Shatters"})
 
-local function Song()
 local plrs = game:GetService("Players")
 local light = game:GetService("Lighting")
 local rep = game:GetService("ReplicatedStorage")
@@ -73,7 +72,7 @@ local function getDummy()
 	end
 	return dummy
 end
-end
+
 
 --||ATab||--
 
@@ -307,6 +306,50 @@ end
 end)
 wait(.1)
 end
+
+end
+})
+
+BTab:AddButton({
+    Name = "hacker kill",
+    Callback = function()
+        local part = Instance.new("Part")
+part.Parent = Game.Workspace
+part.Anchored = true
+part.Position = Vector3.new(20.4143,-143.366,3483.62)
+part.Size = Vector3.new(16,1.2,16)
+part.Name = "FlignPart"
+local part = Instance.new("Part")
+part.Parent = Game.Workspace
+part.Anchored = true
+part.CanCollide = falsed
+part.Size = Vector3.new(0.1,0.2,0.1)
+part.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+part.Name = "tp"
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(20.4143,-141.366,3483.62) 
+wait(0.2)
+spawn(function()
+        local LockOn = game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
+        m = game.Players.LocalPlayer:GetMouse()
+        if LockOn then
+            target = LockOn
+            r2 = target.HumanoidRootPart.CFrame
+        elseif not LockOn then
+            r2 = m.Hit * CFrame.new(0, 4, 0)
+        end
+        local A_1 = {
+            [1] = getrenv()._G.Pass,
+            [2] = "PatienceAttack",
+            [3] = r2.p,
+            [4] = game:GetService("Players").LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
+        }
+        local Event = game:GetService("ReplicatedStorage").Remotes.CharaMoves
+        Event:InvokeServer(A_1)
+end)
+wait(3.5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.tp.CFrame
+game.Workspace.tp:Destroy()
+game.Workspace.FlignPart:Destroy()   
 
 end
 })
@@ -985,7 +1028,6 @@ local DTab = Window:MakeTab({
 DTab:AddButton({
 	Name = "ReaperTale Chara",
 	Callback = function()
-	Song()
 local plrs = game:GetService("Players")
 local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
@@ -1010,7 +1052,6 @@ end
 DTab:AddButton({
 	Name = "Asriel",
 	Callback = function()
-	Song()
 local plrs = game:GetService("Players")
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
@@ -1035,7 +1076,6 @@ end
 DTab:AddButton({
 	Name = "Chara Op",
 	Callback = function()
-	Song()
 local plrs = game:GetService("Players")
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
@@ -1061,7 +1101,6 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Betty 2",
 	Callback = function()
-	Song()
 local plrs = game:GetService("Players")
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
@@ -1087,7 +1126,6 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Sakuya",
 	Callback = function()
-	Song()
 local plrs = game:GetService("Players")
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
@@ -1113,7 +1151,6 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Sakuya Hit",
 	Callback = function()
-	Song()
 local plrs = game:GetService("Players")
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
@@ -1139,7 +1176,6 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Stevonnie",
 	Callback = function()
-	Song()
 local plrs = game:GetService("Players")
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
