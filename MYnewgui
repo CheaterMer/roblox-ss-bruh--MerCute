@@ -105,6 +105,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/CheaterMer/23wtrgsngj
 end
 })
 
+ATab:AddLabel("--GamePass--")
+
 ATab:AddButton({
 	Name = "Stevonnie inf life",
 	Callback = function()
@@ -1305,6 +1307,173 @@ DTab:AddButton({
 			char:SetPrimaryPartCFrame(pos)
 		end
 		
+		end
+})
+
+DTab:AddButton({
+	Name = "SSChara Song",
+	Callback = function()
+        local player = game.Players.LocalPlayer
+        local char = player.Character
+		local pos = char.HumanoidRootPart.CFrame
+		local dummy = getDummy()
+		if not dummy then
+			dummy = rep.Resources.MoveEffects.HateBall.HateBall
+		end
+		if dummy and dummy:FindFirstChild("HumanoidRootPart") then
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskwait(0.2)
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskspawn(function()
+				remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {rep.Sounds.GTLevelUp,rep.Sounds.HyperGonerLaugh},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			end)
+			taskwait(0.09)
+			remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {game:GetService("ReplicatedStorage").Resources.Character.CustomMusic.SFChara.HurtPlaylist["1SSChara"]},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			taskwait(0.1)
+			char:SetPrimaryPartCFrame(pos)
+		end
+		
+		end
+})
+
+DTab:AddButton({
+	Name = "SSChara Hit Time",
+	Callback = function()
+        local player = game.Players.LocalPlayer
+        local char = player.Character
+		local pos = char.HumanoidRootPart.CFrame
+		local dummy = getDummy()
+		if not dummy then
+			dummy = rep.Resources.MoveEffects.HateBall.HateBall
+		end
+		if dummy and dummy:FindFirstChild("HumanoidRootPart") then
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskwait(0.2)
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskspawn(function()
+				remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {rep.Sounds.GTLevelUp,rep.Sounds.HyperGonerLaugh},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			end)
+			taskwait(0.09)
+			remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {game:GetService("ReplicatedStorage").Resources.Character.CustomMusic.Chara.Death2Playlist["1Megalo Strike Back"]},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			taskwait(0.1)
+			char:SetPrimaryPartCFrame(pos)
+		end
+		
+		end
+})
+
+DTab:AddButton({
+	Name = "Chara Song",
+	Callback = function()
+        local player = game.Players.LocalPlayer
+        local char = player.Character
+		local pos = char.HumanoidRootPart.CFrame
+		local dummy = getDummy()
+		if not dummy then
+			dummy = rep.Resources.MoveEffects.HateBall.HateBall
+		end
+		if dummy and dummy:FindFirstChild("HumanoidRootPart") then
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskwait(0.2)
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskspawn(function()
+				remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {rep.Sounds.GTLevelUp,rep.Sounds.HyperGonerLaugh},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			end)
+			taskwait(0.09)
+			remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {game:GetService("StarterPlayer").StarterPlayerScripts.Music.Music["2Song"]},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			taskwait(0.1)
+			char:SetPrimaryPartCFrame(pos)
+		end
+		
+		end
+})
+
+DTab:AddButton({
+	Name = "Chara Hit Time",
+	Callback = function()
+        local player = game.Players.LocalPlayer
+        local char = player.Character
+		local pos = char.HumanoidRootPart.CFrame
+		local dummy = getDummy()
+		if not dummy then
+			dummy = rep.Resources.MoveEffects.HateBall.HateBall
+		end
+		if dummy and dummy:FindFirstChild("HumanoidRootPart") then
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskwait(0.2)
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskspawn(function()
+				remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {rep.Sounds.GTLevelUp,rep.Sounds.HyperGonerLaugh},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			end)
+			taskwait(0.09)
+			remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {game:GetService("ReplicatedStorage").Resources.Character.CustomMusic.Chara.Death2Playlist["1Megalo Strike Back"]},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			taskwait(0.1)
+			char:SetPrimaryPartCFrame(pos)
+		end
+		
+		end
+})
+
+DTab:AddButton({
+	Name = "Song Remove",
+	Callback = function()
+      
+        player = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+        for _,v in pairs(player:GetDescendants()) do
+        if v.Name == '3Song' then
+        v:Destroy()
+        end
+        end
+        
+        player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        
+        for _,v in pairs(player:GetDescendants()) do
+        if v.Name == '2Song' then
+        v:Destroy()
+        end
+        end
+        
+        player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        
+        for _,v in pairs(player:GetDescendants()) do
+        if v.Name == '5Song' then
+        v:Destroy()
+        end
+        end
+        
+        player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        
+        for _,v in pairs(player:GetDescendants()) do
+        if v.Name == '1' then
+        v:Destroy()
+        end
+        end
+        
+        player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        
+        for _,v in pairs(player:GetDescendants()) do
+        if v.Name == '1SSChara' then
+        v:Destroy()
+        end
+        end
+        
+        player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        
+        for _,v in pairs(player:GetDescendants()) do
+        if v.Name == '1Bunny' then
+        v:Destroy()
+        end
+        end
+        
+        player = game.Players.LocalPlayer.Character.HumanoidRootPart
+        
+        for _,v in pairs(player:GetDescendants()) do
+        if v.Name == '1Megalo Strike Back' then
+        v:Destroy()
+        end
+        end
+
 		end
 })
 
