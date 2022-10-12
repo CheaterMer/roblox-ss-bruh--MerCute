@@ -89,7 +89,7 @@ ATab:AddButton({
 	Name = "Chara not work",
 	Callback = function()
 
---loadstring(game:HttpGet("https://raw.githubusercontent.com/CheaterMer/roblox-ss-bruh--MerCute/main/LordMerChara"))()		
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CheaterMer/roblox-ss-bruh--MerCute/main/LordMerChara"))()		
 
 end
 })
