@@ -51,11 +51,11 @@ local fun
 local index
 
 local player = game.Players.LocalPlayer
+local char = player.Character
 local Players = game:GetService("Players")
 local rs = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
 local userInputService = game:GetService("UserInputService")
-local char = player.Character
 
 local function getchar()
 local protection = game.Players.LocalPlayer.Backpack.Main.LockOnScript.LockOn.Value
@@ -63,6 +63,7 @@ return protection
 end     
 
 local function getDummy()
+    local plrs = game:GetService("Players")
 	local dummy
 	for i,v in pairs(workspace:GetChildren()) do
 		if v.Name:match("Dummy") and not plrs:FindFirstChild(v.Name) and v.Name ~= "DodgingDummy" and v.PrimaryPart then
@@ -100,6 +101,91 @@ ATab:AddButton({
 	Callback = function()
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CheaterMer/23wtrgsngj6eterejutekyhwsaeurt/main/nope"))()		
+
+end
+})
+
+ATab:AddButton({
+	Name = "Stevonnie inf life",
+	Callback = function()
+
+    game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true)
+    game.Players.LocalPlayer.PlayerGui.CharacterSelection.Character.Value = "Stevonnie"
+    
+    wait(1.5)
+
+    local char = game.Players.LocalPlayer.Character
+spawn(function()
+    repeat wait()
+        for _,v in pairs(char:GetChildren()) do
+            if v.Name == 'DrainStamina' or v.Name == 'DrainSprint' or v.Name == 'Hit' or v.Name == 'Hitt' or v.Name == 'Damaged' or v.Name == 'Grounded' or v.Name == 'StayGrounded' or v.Name == 'KnockBack' or v.Name == 'Walled' then
+                v:Destroy()
+            end
+        end
+    until false
+end)
+
+
+game:GetService("UserInputService").InputBegan:Connect(function(inp)
+    if inp.KeyCode == Enum.KeyCode.Five then
+
+
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Move5",
+        [3] = true
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.StevonnieMoves:InvokeServer(unpack(args))
+
+
+
+
+end
+end)
+
+
+
+game:GetService("UserInputService").InputBegan:Connect(function(inp)
+    if inp.KeyCode == Enum.KeyCode.Six then
+
+
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "SpeedMode",
+        [3] = true
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.StevonnieMoves:InvokeServer(unpack(args))
+
+
+end
+end)
+
+
+while true do
+wait(.1)
+spawn(function()
+while true do
+wait(0.1)
+local Character = game.Players.LocalPlayer.Character
+Character.Effects.Cloned:Destroy()
+end
+end)
+
+spawn(function()
+while true do
+wait(0.1)
+local Character = game.Players.LocalPlayer.Character
+Character.SecondLife:Destroy()
+end
+end)
+wait(.1)
+end
 
 end
 })
@@ -283,74 +369,7 @@ end)
 end
 })
 
-BTab:AddButton({
-	Name = "Stevonnie inf life",
-	Callback = function()
-
-while true do
-wait(.1)
-spawn(function()
-while true do
-wait(0.1)
-local Character = game.Players.LocalPlayer.Character
-Character.Effects.Cloned:Destroy()
-end
-end)
-
-spawn(function()
-while true do
-wait(0.1)
-local Character = game.Players.LocalPlayer.Character
-Character.SecondLife:Destroy()
-end
-end)
-wait(.1)
-end
-
-game:GetService("UserInputService").InputBegan:Connect(function(inp)
-    if inp.KeyCode == Enum.KeyCode.Five then
-
-
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "Move5",
-        [3] = true
-    }
-}
-
-game:GetService("ReplicatedStorage").Remotes.StevonnieMoves:InvokeServer(unpack(args))
-
-
-
-
-end
-end)
-
-
-
-game:GetService("UserInputService").InputBegan:Connect(function(inp)
-    if inp.KeyCode == Enum.KeyCode.Six then
-
-
-local args = {
-    [1] = {
-        [1] = getrenv()._G.Pass,
-        [2] = "SpeedMode",
-        [3] = true
-    }
-}
-
-game:GetService("ReplicatedStorage").Remotes.StevonnieMoves:InvokeServer(unpack(args))
-
-
-end
-end)
-
-end
-})
-
-ATab:AddLabel("--Kill Player--")
+BTab:AddLabel("--Kill Player--")
 
 BTab:AddButton({
     Name = "hacker kill",
@@ -1112,7 +1131,8 @@ local DTab = Window:MakeTab({
 DTab:AddButton({
 	Name = "ReaperTale Chara",
 	Callback = function()
-local plrs = game:GetService("Players")
+        local player = game.Players.LocalPlayer
+        local char = player.Character
 local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
 		if not dummy then
@@ -1136,7 +1156,8 @@ end
 DTab:AddButton({
 	Name = "Asriel",
 	Callback = function()
-local plrs = game:GetService("Players")
+        local player = game.Players.LocalPlayer
+        local char = player.Character
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
 		if not dummy then
@@ -1160,7 +1181,8 @@ end
 DTab:AddButton({
 	Name = "Chara Op",
 	Callback = function()
-local plrs = game:GetService("Players")
+        local player = game.Players.LocalPlayer
+        local char = player.Character
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
 		if not dummy then
@@ -1185,7 +1207,8 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Betty 2",
 	Callback = function()
-local plrs = game:GetService("Players")
+        local player = game.Players.LocalPlayer
+        local char = player.Character
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
 		if not dummy then
@@ -1210,7 +1233,8 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Sakuya",
 	Callback = function()
-local plrs = game:GetService("Players")
+        local player = game.Players.LocalPlayer
+        local char = player.Character
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
 		if not dummy then
@@ -1235,7 +1259,8 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Sakuya Hit",
 	Callback = function()
-local plrs = game:GetService("Players")
+        local player = game.Players.LocalPlayer
+        local char = player.Character
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
 		if not dummy then
@@ -1260,7 +1285,8 @@ local plrs = game:GetService("Players")
 DTab:AddButton({
 	Name = "Stevonnie",
 	Callback = function()
-local plrs = game:GetService("Players")
+        local player = game.Players.LocalPlayer
+        local char = player.Character
 		local pos = char.HumanoidRootPart.CFrame
 		local dummy = getDummy()
 		if not dummy then
