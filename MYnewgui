@@ -307,6 +307,46 @@ end)
 wait(.1)
 end
 
+game:GetService("UserInputService").InputBegan:Connect(function(inp)
+    if inp.KeyCode == Enum.KeyCode.Five then
+
+
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "Move5",
+        [3] = true
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.StevonnieMoves:InvokeServer(unpack(args))
+
+
+
+
+end
+end)
+
+
+
+game:GetService("UserInputService").InputBegan:Connect(function(inp)
+    if inp.KeyCode == Enum.KeyCode.Six then
+
+
+local args = {
+    [1] = {
+        [1] = getrenv()._G.Pass,
+        [2] = "SpeedMode",
+        [3] = true
+    }
+}
+
+game:GetService("ReplicatedStorage").Remotes.StevonnieMoves:InvokeServer(unpack(args))
+
+
+end
+end)
+
 end
 })
 
