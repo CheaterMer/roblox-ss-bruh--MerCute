@@ -1363,32 +1363,6 @@ DTab:AddButton({
 })
 
 DTab:AddButton({
-	Name = "Chara Song",
-	Callback = function()
-        local player = game.Players.LocalPlayer
-        local char = player.Character
-		local pos = char.HumanoidRootPart.CFrame
-		local dummy = getDummy()
-		if not dummy then
-			dummy = rep.Resources.MoveEffects.HateBall.HateBall
-		end
-		if dummy and dummy:FindFirstChild("HumanoidRootPart") then
-			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
-			taskwait(0.2)
-			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
-			taskspawn(function()
-				remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {rep.Sounds.GTLevelUp,rep.Sounds.HyperGonerLaugh},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
-			end)
-			taskwait(0.09)
-			remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {game:GetService("StarterPlayer").StarterPlayerScripts.Music.Music["2Song"]},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
-			taskwait(0.1)
-			char:SetPrimaryPartCFrame(pos)
-		end
-		
-		end
-})
-
-DTab:AddButton({
 	Name = "Chara Hit Time",
 	Callback = function()
         local player = game.Players.LocalPlayer
@@ -1407,6 +1381,32 @@ DTab:AddButton({
 			end)
 			taskwait(0.09)
 			remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {game:GetService("ReplicatedStorage").Resources.Character.CustomMusic.Chara.Death2Playlist["1Megalo Strike Back"]},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			taskwait(0.1)
+			char:SetPrimaryPartCFrame(pos)
+		end
+		
+		end
+})
+
+DTab:AddButton({
+	Name = "Delta Song",
+	Callback = function()
+        local player = game.Players.LocalPlayer
+        local char = player.Character
+		local pos = char.HumanoidRootPart.CFrame
+		local dummy = getDummy()
+		if not dummy then
+			dummy = rep.Resources.MoveEffects.HateBall.HateBall
+		end
+		if dummy and dummy:FindFirstChild("HumanoidRootPart") then
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskwait(0.2)
+			char:SetPrimaryPartCFrame(dummy.HumanoidRootPart.CFrame)
+			taskspawn(function()
+				remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {rep.Sounds.GTLevelUp,rep.Sounds.HyperGonerLaugh},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
+			end)
+			taskwait(0.09)
+			remotes.Damage:InvokeServer(pass, dummy, {CombatInv=true,BlockAble=false,Type="Normal",Sound = {game:GetService("ReplicatedStorage").Resources.Character.CustomMusic.DeltaSans.StarterPlaylist["1"]},Damage = 0,HitTime = 0,HurtAnimation = rep.Animations.HurtAnimations["Hurt1"],VictimCFrame = dummy.HumanoidRootPart.CFrame,Velocity=dummy.HumanoidRootPart.CFrame.LookVector,HitEffect="BurstEffect"})
 			taskwait(0.1)
 			char:SetPrimaryPartCFrame(pos)
 		end
