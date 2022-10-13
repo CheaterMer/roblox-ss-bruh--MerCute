@@ -421,40 +421,36 @@ BTab:AddButton({
 	Name = "God Mode Lock on",
 	Callback = function()
 
-        pcall(function()
+        local funcs = {}
 
-            local funcs = {}
-        
-            for i, v in next, getgc() do
-        
-                if type(v) == "function" then
-        
-                    if getfenv(v).script and getfenv(v).script.Name and getfenv(v).script.Name == "LockOnScript" then
-        
-                        table.insert(funcs, v)
-        
-                    end
-        
+        for i, v in next, getgc() do
+    
+            if type(v) == "function" then
+    
+                if getfenv(v).script and getfenv(v).script.Name and getfenv(v).script.Name == "LockOnScript" then
+    
+                    table.insert(funcs, v)
+    
                 end
-        
+    
             end
-        
-            repeat wait() until #funcs ~= 0
-        
-            local target = funcs[#funcs]
-        
-            for i2, v2 in next, getconstants(target) do
-        
-                if i2 == 44 and tostring(v2) == "0" then
-        
-                    setconstant(target, i2, -999999)
-                    print("hooked")
-        
-                end
-        
+    
+        end
+    
+        repeat wait() until #funcs ~= 0
+    
+        local target = funcs[#funcs]
+    
+        for i2, v2 in next, getconstants(target) do
+    
+            if i2 == 44 and tostring(v2) == "0" then
+    
+                setconstant(target, i2, -999999)
+                print("hooked")
+    
             end
-        
-        end)
+    
+        end
 
 end
 })
